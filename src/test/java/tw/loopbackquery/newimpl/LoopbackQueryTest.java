@@ -1,4 +1,4 @@
-package swipes.loopbackquery.newimpl;
+package tw.loopbackquery.newimpl;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;

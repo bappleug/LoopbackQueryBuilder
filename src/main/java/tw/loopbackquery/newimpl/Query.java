@@ -1,4 +1,4 @@
-package swipes.loopbackquery.newimpl;
+package tw.loopbackquery.newimpl;
 
 import lombok.Data;
 

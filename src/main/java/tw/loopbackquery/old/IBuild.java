@@ -1,4 +1,4 @@
-package swipes.loopbackquery.old;
+package tw.loopbackquery.old;
 
 public interface IBuild<T> {
     T build();

@@ -1,4 +1,4 @@
-package swipes.loopbackquery.old;
+package tw.loopbackquery.old;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
