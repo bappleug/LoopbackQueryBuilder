@@ -8,7 +8,7 @@ public class Query {
 
     public static class Builder {
         private LoopbackQuery loopbackQuery;
-        private int offset;
+        private Integer offset;
 
         public Builder(LoopbackQuery loopbackQuery) {
             this.loopbackQuery = loopbackQuery;
@@ -16,7 +16,10 @@ public class Query {
 
         public String build() {
             final Query query = new Query();
-            query.setOffset(offset);
+
+            if(offset != null) {
+                query.setOffset(offset);
+            }
             loopbackQuery.setQuery(query);
             return loopbackQuery.toString();
         }
