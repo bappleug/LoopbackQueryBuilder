@@ -34,4 +34,23 @@ public class LoopbackQueryTest {
             assertThat(json).isEqualTo("{}");
         }
     }
+
+    @Nested
+    class LimitTest {
+
+        @Test
+        void should_return_json_with_limit_when_limit_set() {
+            String json = LoopbackQuery.query(objectMapper)
+                    .limit(1)
+                    .build();
+            assertThat(json).isEqualTo("{\"limit\":1}");
+        }
+
+        @Test
+        void should_return_json_without_limit_when_limit_not_set() {
+            String json = LoopbackQuery.query(objectMapper)
+                    .build();
+            assertThat(json).isEqualTo("{}");
+        }
+    }
 }
