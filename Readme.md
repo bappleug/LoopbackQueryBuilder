@@ -21,19 +21,19 @@ Loopback query filter generator
 ### Query可以设置和生成带有limit和offset的json query
 - 数据格式：`"offset": 0, "limit": 10`
 - Sub-tasks
-    - (1)Query设置了offset时，生成的json字符串中包含offset，且数值与设置一致
-    - (1)Query设置了limit时，生成的json字符串中包含limit，且数值与设置一致
-    - (1)Query未设置offset时，生成的json字符串中不包含offset
-    - (1)Query未设置limit时，生成的json字符串中不包含limit
+    - (1)Query设置了offset时，生成的json字符串中包含offset，且数值与设置一致 ✅
+    - (1)Query设置了limit时，生成的json字符串中包含limit，且数值与设置一致 ✅
+    - (1)Query未设置offset时，生成的json字符串中不包含offset ✅
+    - (1)Query未设置limit时，生成的json字符串中不包含limit ✅
 - 附：Criteria转换规则：`offset = (pageNumber - 1) * pageSize, limit = pageSize`
 ### Query可以设置和生成带有order的json query
 - 数据格式：
     - (1)单个：`"order": "field_name <asc|desc>"`
     - (3)多个：`"order": ["field_name <asc|desc>", "field_name <asc|desc>", ...]`
 - Sub-tasks
-    - (1)Query设置了order为ASC时，生成的json字符串中包含order，field_name与设置一致且为ASC
-    - (1)Query设置了order为DESC时，生成的json字符串中包含order，field_name与设置一致且为DESC
-    - (1)Query未设置order时，生成的json字符串中不包含order
+    - (1)Query设置了order为ASC时，生成的json字符串中包含order，field_name与设置一致且为ASC ✅
+    - (1)Query设置了order为DESC时，生成的json字符串中包含order，field_name与设置一致且为DESC ✅
+    - (1)Query未设置order时，生成的json字符串中不包含order ✅
     - (3)Query设置了多个order时，生成的json字符串中包含order，多个条目的field_name和order与设置一致
     - (5)Query为order设置了两个相同的field_name时，生成json字符串报错
 ### Query可以设置和生成带有include的json query
