@@ -72,5 +72,12 @@ public class LoopbackQueryTest {
                     .build().toString();
             assertThat(json).isEqualTo("{\"order\":\"fieldName desc\"}");
         }
+
+        @Test
+        void should_return_json_without_orderwhen_order_not_set() {
+            String json = LoopbackQuery.query(objectMapper)
+                    .build().toString();
+            assertThat(json).isEqualTo("{}");
+        }
     }
 }
