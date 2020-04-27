@@ -1,7 +1,6 @@
 package tw.loopbackquery.newimpl;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 
 @Data
@@ -11,6 +10,7 @@ public class Query {
     private Integer offset;
     private Integer limit;
     private String order;
+    private String include;
 
     @Override
     public String toString() {
@@ -22,6 +22,7 @@ public class Query {
         private Integer offset;
         private Integer limit;
         private Order order;
+        private String include;
 
         public Builder(LoopbackQuery loopbackQuery) {
             this.loopbackQuery = loopbackQuery;
@@ -40,6 +41,9 @@ public class Query {
             if(order != null) {
                 query.setOrder(order.toString());
             }
+            if(include != null) {
+                query.setInclude(include.toString());
+            }
 
             return query;
         }
@@ -56,6 +60,11 @@ public class Query {
 
         public Builder orderBy(Order order) {
             this.order = order;
+            return this;
+        }
+
+        public Builder include(String relation) {
+            this.include = relation;
             return this;
         }
     }

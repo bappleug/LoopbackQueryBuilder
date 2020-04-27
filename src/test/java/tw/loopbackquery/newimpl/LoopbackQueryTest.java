@@ -80,4 +80,23 @@ public class LoopbackQueryTest {
             assertThat(json).isEqualTo("{}");
         }
     }
+
+    @Nested
+    class IncludeTest {
+
+        @Test
+        void should_return_json_with_single_include_when_single_include_set() {
+            String json = LoopbackQuery.query(objectMapper)
+                    .include("relation_name")
+                    .build().toString();
+            assertThat(json).isEqualTo("{\"include\":\"relation_name\"}");
+        }
+
+        @Test
+        void should_return_json_with_no_include_when_include_not_set() {
+            String json = LoopbackQuery.query(objectMapper)
+                    .build().toString();
+            assertThat(json).isEqualTo("{}");
+        }
+    }
 }
