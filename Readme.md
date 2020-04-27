@@ -38,18 +38,18 @@ Loopback query filter generator
     - (5)Query为order设置了两个相同的field_name时，生成json字符串报错
 ### Query可以设置和生成带有include的json query
 - 数据格式：
-    - 单层单个relation：`"include": {"relation_name"}`
+    - 单层单个relation：`"include": "relation_name"`
     - 单层多个relation：`"include": ["relation_name1", "relation_name2"]`
-    - 两层单个relation：`"include": {"relation_name": {"subrelation_name"}}`
+    - 两层单个relation：`"include": {"relation_name": "subrelation_name"}`
     - 三层单个relation：`"include": {"relation_name": {"subrelation_name": "sub-subrelation_name"}}`
     - 多层多个复合relation：`"include": ["relation_name1": [{"subrelation_name1": "sub-subrelation_name"}, "subrelation_name2"], "relation_name2"]`
 - Sub-tasks:
-    - (3)Query设置了include时，为单层单个relation时，生成的json符合格式要求
-    - (3)Query未设置include时，生成的json字符串中不包含include
-    - (5)Query设置了include时，为单层多个relation时，生成的json符合格式要求
-    - (5)Query设置了include时，为两层单个relation时，生成的json符合格式要求
-    - (7)Query设置了include时，为三层单个relation时，生成的json符合格式要求
-    - (7)Query设置了include时，为多层多个的复合relation时，生成的json符合格式要求
+    - (1)Query设置了include时，为单层单个relation时，生成的json符合格式要求
+    - (1)Query未设置include时，生成的json字符串中不包含include
+    - (3)Query设置了include时，为单层多个relation时，生成的json符合格式要求
+    - (3)Query设置了include时，为两层单个relation时，生成的json符合格式要求
+    - (5)Query设置了include时，为三层单个relation时，生成的json符合格式要求
+    - (5)Query设置了include时，为多层多个的复合relation时，生成的json符合格式要求
 ### Query可以设置和生成带有where的json query
 - 数据格式：
     - (1)单个where参数 `"where": {"field_name": {"eq": "value"}}`
