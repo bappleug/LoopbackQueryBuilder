@@ -23,14 +23,14 @@ public class LoopbackQueryTest {
         void should_return_json_with_offset_when_offset_set() {
             String json = LoopbackQuery.query(objectMapper)
                     .offset(1)
-                    .build();
+                    .build().toString();
             assertThat(json).isEqualTo("{\"offset\":1}");
         }
 
         @Test
         void should_return_json_without_offset_when_offset_not_set() {
             String json = LoopbackQuery.query(objectMapper)
-                    .build();
+                    .build().toString();
             assertThat(json).isEqualTo("{}");
         }
     }
@@ -42,15 +42,27 @@ public class LoopbackQueryTest {
         void should_return_json_with_limit_when_limit_set() {
             String json = LoopbackQuery.query(objectMapper)
                     .limit(1)
-                    .build();
+                    .build().toString();
             assertThat(json).isEqualTo("{\"limit\":1}");
         }
 
         @Test
         void should_return_json_without_limit_when_limit_not_set() {
             String json = LoopbackQuery.query(objectMapper)
-                    .build();
+                    .build().toString();
             assertThat(json).isEqualTo("{}");
+        }
+    }
+
+    @Nested
+    class OrderTest {
+
+        @Test
+        void should_return_json_with_single_order_asc_when_single_order_set() {
+            String json = LoopbackQuery.query(objectMapper)
+                    .orderBy(Order.by("fieldName").asc())
+                    .build().toString();
+            assertThat(json).isEqualTo("{\"order\":\"fieldName asc\"}");
         }
     }
 }

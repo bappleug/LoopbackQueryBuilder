@@ -28,8 +28,8 @@ Loopback query filter generator
 - 附：Criteria转换规则：`offset = (pageNumber - 1) * pageSize, limit = pageSize`
 ### Query可以设置和生成带有order的json query
 - 数据格式：
-    - (1)单个：`"order": "field_name <ASC|DESC>"`
-    - (3)多个：`"order": ["field_name <ASC|DESC>", "field_name <ASC|DESC>", ...]`
+    - (1)单个：`"order": "field_name <asc|desc>"`
+    - (3)多个：`"order": ["field_name <asc|desc>", "field_name <asc|desc>", ...]`
 - Sub-tasks
     - (1)Query设置了order为ASC时，生成的json字符串中包含order，field_name与设置一致且为ASC
     - (1)Query设置了order为DESC时，生成的json字符串中包含order，field_name与设置一致且为DESC

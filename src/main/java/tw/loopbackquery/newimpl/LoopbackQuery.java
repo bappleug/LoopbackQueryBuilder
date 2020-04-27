@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class LoopbackQuery {
     private ObjectMapper objectMapper;
-    private Query query;
 
     private LoopbackQuery(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
@@ -16,14 +15,9 @@ public class LoopbackQuery {
         return new Query.Builder(loopbackQuery);
     }
 
-    public void setQuery(Query query) {
-        this.query = query;
-    }
-
-    @Override
-    public String toString() {
+    public String toString(Object object) {
         try {
-            return objectMapper.writeValueAsString(query);
+            return objectMapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             throw new RuntimeException();
