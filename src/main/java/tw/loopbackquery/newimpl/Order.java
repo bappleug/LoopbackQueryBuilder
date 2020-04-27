@@ -30,6 +30,11 @@ public class Order {
             return build();
         }
 
+        public Order desc() {
+            this.direction = Direction.DESC;
+            return build();
+        }
+
         public Order build() {
             Order order = new Order();
             order.setByDirection(by + " " + direction.value());
