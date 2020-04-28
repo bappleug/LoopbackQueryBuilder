@@ -37,6 +37,15 @@ class JsonMapTest {
     }
 
     @Test
+    void should_return_json_with_two_fields_ignore_order() throws JsonProcessingException {
+        Map<String, Object> map = new HashMap<>();
+        map.put("key1", 1);
+        map.put("key2", 2);
+        final String json = objectMapper.writeValueAsString(map);
+        assertThatJson(json).isEqualTo("{key2: 2, key1: 1}");
+    }
+
+    @Test
     void should_return_json_with_nested_json_object_fields() throws JsonProcessingException {
         Map<String, Object> map = new HashMap<>();
         Map<String, Object> nestedMap = new HashMap<>();
