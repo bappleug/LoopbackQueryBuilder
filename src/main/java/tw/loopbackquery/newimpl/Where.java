@@ -1,5 +1,6 @@
 package tw.loopbackquery.newimpl;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -12,6 +13,11 @@ public class Where extends HashMap<String, Object>{
     public static Where.Builder by(String fieldName) {
         final Builder builder = new Builder();
         return builder.by(fieldName);
+    }
+
+    public Where andCombine(Where where) {
+        this.putAll(where);
+        return this;
     }
 
     public static class Builder implements IBuilder<Where> {

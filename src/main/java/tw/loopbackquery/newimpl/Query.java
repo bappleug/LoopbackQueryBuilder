@@ -3,6 +3,8 @@ package tw.loopbackquery.newimpl;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
+import java.util.Arrays;
+
 @Data
 public class Query {
     @JsonIgnore
@@ -73,8 +75,8 @@ public class Query {
             return this;
         }
 
-        public Builder where(Where where) {
-            this.where = where;
+        public Builder where(Where... wheres) {
+            this.where = Arrays.stream(wheres).reduce(new Where(), Where::andCombine);
             return this;
         }
     }

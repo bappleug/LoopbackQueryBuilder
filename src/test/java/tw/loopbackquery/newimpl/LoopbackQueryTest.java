@@ -146,11 +146,19 @@ public class LoopbackQueryTest {
         }
 
         @Test
-        void should_return_json_with_where_eq_boolean_string_value_when_where_eq_boolean_set() {
+        void should_return_json_with_where_eq_boolean_value_when_where_eq_boolean_set() {
             String json = LoopbackQuery.query(objectMapper)
                     .where(Where.by("fieldName").eq(false))
                     .build().toString();
             assertThatJson(json).isEqualTo("{where: {fieldName: {eq:false}}}");
+        }
+
+        @Test
+        void should_return_json_with_multiple_where_eq_value_when_where_multiple_eq_set() {
+            String json = LoopbackQuery.query(objectMapper)
+                    .where(Where.by("fieldName1").eq(false), Where.by("fieldName2").eq("value"))
+                    .build().toString();
+            assertThatJson(json).isEqualTo("{where: {fieldName1: {eq:false}, fieldName2: {eq:\"value\"}}}");
         }
 
         @Test
