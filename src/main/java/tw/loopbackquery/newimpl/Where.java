@@ -24,7 +24,7 @@ public class Where extends HashMap<String, Object>{
             return this;
         }
 
-        public Where eq(String value) {
+        public Where eq(Object value) {
             operator = Operator.EQ;
             this.value = value;
             return build();

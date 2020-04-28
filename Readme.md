@@ -52,9 +52,9 @@ Loopback query filter generator
     - (5)Query设置了include时，为多层多个的复合relation时，生成的json符合格式要求
 ### Query可以设置和生成带有where的json query
 - 数据格式：
-    - (1)单个where参数 `"where": {"field_name": {"eq": "value"}}`
-    - (1)支持eq `"where": {"field_name": {"eq": "{value}"}}`
-    - (1)多个where参数`"where": {"field_name1": {"eq": "value1"}, "field_name2": {"eq": "value2"}}`
+    - (1)支持单个where参数类型为int,float,string,boolean,instant `"where": {"field_name": {"eq": "value"}}` ✅
+    - (1)支持eq `"where": {"field_name": {"eq": "{value}"}}` ✅
+    - (1)支持多个where参数`"where": {"field_name1": {"eq": "value1"}, "field_name2": {"eq": "value2"}}` 
     - (1)支持操作符like/nlike `"where": {"field_name": {"like": "{value}"}}`
     - (1)支持操作符正则 `"where": {"field_name": {"regexp": "{regex}"}}`
     - (1)支持操作符and/or `"where": {"and": [sub_where, sub_where]}`

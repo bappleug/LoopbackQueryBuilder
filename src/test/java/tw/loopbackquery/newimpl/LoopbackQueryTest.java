@@ -2,9 +2,15 @@ package tw.loopbackquery.newimpl;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.time.Instant;
+import java.util.Date;
+
+import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LoopbackQueryTest {
@@ -14,6 +20,10 @@ public class LoopbackQueryTest {
     {
         objectMapper = new ObjectMapper();
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+//        objectMapper.registerModule(customizeJavaTimeModule());
+        objectMapper.registerModule(new JavaTimeModule());
+//        objectMapper.registerModule(customizeLocaleModule());
+        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
     }
 
     @Nested
@@ -108,7 +118,39 @@ public class LoopbackQueryTest {
             String json = LoopbackQuery.query(objectMapper)
                     .where(Where.by("fieldName").eq("strValue"))
                     .build().toString();
-            assertThat(json).isEqualTo("{\"where\":{\"fieldName\":{\"eq\":\"strValue\"}}}");
+            assertThatJson(json).isEqualTo("{where:{fieldName:{eq:\"strValue\"}}}");
+        }
+
+        @Test
+        void should_return_json_with_where_eq_int_value_when_where_eq_int_set() {
+            String json = LoopbackQuery.query(objectMapper)
+                    .where(Where.by("fieldName").eq(100))
+                    .build().toString();
+            assertThatJson(json).isEqualTo("{where: {fieldName: {eq:100}}}");
+        }
+
+        @Test
+        void should_return_json_with_where_eq_float_value_when_where_eq_float_set() {
+            String json = LoopbackQuery.query(objectMapper)
+                    .where(Where.by("fieldName").eq(3.1415926))
+                    .build().toString();
+            assertThatJson(json).isEqualTo("{where: {fieldName: {eq:3.1415926}}}");
+        }
+
+        @Test
+        void should_return_json_with_where_eq_instant_date_value_when_where_eq_instant_date_set() {
+            String json = LoopbackQuery.query(objectMapper)
+                    .where(Where.by("fieldName").eq(Instant.parse("2019-12-03T10:15:30Z")))
+                    .build().toString();
+            assertThatJson(json).isEqualTo("{where: {fieldName: {eq:\"2019-12-03T10:15:30Z\"}}}");
+        }
+
+        @Test
+        void should_return_json_with_where_eq_boolean_string_value_when_where_eq_boolean_set() {
+            String json = LoopbackQuery.query(objectMapper)
+                    .where(Where.by("fieldName").eq(false))
+                    .build().toString();
+            assertThatJson(json).isEqualTo("{where: {fieldName: {eq:false}}}");
         }
 
         @Test

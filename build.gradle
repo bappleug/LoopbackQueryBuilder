@@ -26,6 +26,7 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.9'
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.9.9'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-json-org:2.9.9'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.9'
     implementation 'com.github.joschi.jackson:jackson-datatype-threetenbp:2.6.4'
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.10.5'
 
