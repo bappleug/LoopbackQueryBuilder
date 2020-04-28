@@ -55,21 +55,40 @@ Loopback query filter generator
     - (1)单个where参数 `"where": {"field_name": {"eq": "value"}}`
     - (1)支持eq `"where": {"field_name": {"eq": "{value}"}}`
     - (1)多个where参数`"where": {"field_name1": {"eq": "value1"}, "field_name2": {"eq": "value2"}}`
-    - (3)支持操作符and/or `"where": {"and": [sub_where, sub_where]}`
-    - (5)支持操作符正则 `"where": {"field_name": {"regexp": "{regex}"}}`
-    - (5)支持操作符gt/gte/lt/lte `"where": {"field_name": {"gt": 1}}`
+    - (1)支持操作符like/nlike `"where": {"field_name": {"like": "{value}"}}`
+    - (1)支持操作符正则 `"where": {"field_name": {"regexp": "{regex}"}}`
+    - (1)支持操作符and/or `"where": {"and": [sub_where, sub_where]}`
+    - (3)支持操作符gt/gte/lt/lte `"where": {"field_name": {"gt": 1}}`
+    - (3)支持操作符between `"where": {"field_name": {"between": [1, 5]}}`
+    - (5)支持操作符inq/nin `"where": {"field_name", {"inq": ["value1", "value2", "value3"]}}`
     - (5)支持操作符neq `"where": {"field_name": {"neq": "{value}"}}`
-    - (7)支持操作符inq/nin `"where": {"field_name", {"inq": ["value1", "value2", "value3"]}}`
-    - (7)支持操作符between `"where": {"field_name": {"between": [1, 5]}}`
-    - (7)支持操作符like/nlike `"where": {"field_name": {"like": "{value}"}}`
 - Sub-tasks: 
     - 参见数据格式
     - (1)Query未设置where时，生成的json字符串中不包含where
+### 单独使用Where，也可以构建和生成的json用作Loopback的update,delete操作
+- 数据格式：参见Query中的where使用
+- Sub-tasks:
+    - (5)独立构建where，可以生成符合要求格式的json
 ### Query可以设置和生成带有fields的json query
 - 数据格式：
     - 单个field参数`"fields": {"field_name": false}`
     - 多个field参数`"fields": {"field_name": true, "field_name": true}`
 - Sub-tasks: 
-    - 参见数据格式
-    - (3)Query未设置field时，生成的json字符串中不包含field
-### Query可以设置和生成带有scope的json query
+    - (5)参见数据格式
+    - (1)Query未设置field时，生成的json字符串中不包含field
+### Query可以设置和生成带有scope的json query（为了支持include with filter）
+- 数据格式：
+    - 
+    ```json
+      {
+        "include": {
+          "relation": "relation_name",
+          "scope": {
+            "where": {"operation": {"relation_field_name": "value"}}
+          }
+        }
+      }
+    ```
+- Sub-tasks: 
+    - (3)参见数据格式
+    - (1)Query未设置field时，生成的json字符串中不包含field
