@@ -36,6 +36,7 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.8'
 
     testImplementation 'org.hamcrest:hamcrest:2.1'
+    testImplementation 'net.javacrumbs.json-unit:json-unit-spring:2.17.0'
     testImplementation 'org.assertj:assertj-db:1.2.0'
     // Use JUnit Jupiter API for testing.
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.4.2'

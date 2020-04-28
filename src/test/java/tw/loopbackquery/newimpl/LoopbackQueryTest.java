@@ -60,7 +60,7 @@ public class LoopbackQueryTest {
         @Test
         void should_return_json_with_single_order_asc_when_single_order_set() {
             String json = LoopbackQuery.query(objectMapper)
-                    .orderBy(Order.by("fieldName").asc())
+                    .order(Order.by("fieldName").asc())
                     .build().toString();
             assertThat(json).isEqualTo("{\"order\":\"fieldName asc\"}");
         }
@@ -68,13 +68,13 @@ public class LoopbackQueryTest {
         @Test
         void should_return_json_with_single_order_desc_when_single_order_set() {
             String json = LoopbackQuery.query(objectMapper)
-                    .orderBy(Order.by("fieldName").desc())
+                    .order(Order.by("fieldName").desc())
                     .build().toString();
             assertThat(json).isEqualTo("{\"order\":\"fieldName desc\"}");
         }
 
         @Test
-        void should_return_json_without_orderwhen_order_not_set() {
+        void should_return_json_without_order_when_order_not_set() {
             String json = LoopbackQuery.query(objectMapper)
                     .build().toString();
             assertThat(json).isEqualTo("{}");
@@ -90,6 +90,25 @@ public class LoopbackQueryTest {
                     .include("relation_name")
                     .build().toString();
             assertThat(json).isEqualTo("{\"include\":\"relation_name\"}");
+        }
+
+        @Test
+        void should_return_json_with_no_include_when_include_not_set() {
+            String json = LoopbackQuery.query(objectMapper)
+                    .build().toString();
+            assertThat(json).isEqualTo("{}");
+        }
+    }
+
+    @Nested
+    class WhereTest {
+
+        @Test
+        void should_return_json_with_where_eq_string_when_where_eq_string_set() {
+            String json = LoopbackQuery.query(objectMapper)
+                    .where(Where.by("fieldName").eq("strValue"))
+                    .build().toString();
+            assertThat(json).isEqualTo("{\"where\":{\"fieldName\":{\"eq\":\"strValue\"}}}");
         }
 
         @Test

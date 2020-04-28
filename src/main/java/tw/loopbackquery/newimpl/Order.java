@@ -35,6 +35,7 @@ public class Order {
             return build();
         }
 
+        @Override
         public Order build() {
             Order order = new Order();
             order.setByDirection(by + " " + direction.value());

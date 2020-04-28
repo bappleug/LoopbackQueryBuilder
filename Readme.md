@@ -44,8 +44,8 @@ Loopback query filter generator
     - 三层单个relation：`"include": {"relation_name": {"subrelation_name": "sub-subrelation_name"}}`
     - 多层多个复合relation：`"include": ["relation_name1": [{"subrelation_name1": "sub-subrelation_name"}, "subrelation_name2"], "relation_name2"]`
 - Sub-tasks:
-    - (1)Query设置了include时，为单层单个relation时，生成的json符合格式要求
-    - (1)Query未设置include时，生成的json字符串中不包含include
+    - (1)Query设置了include时，为单层单个relation时，生成的json符合格式要求 ✅
+    - (1)Query未设置include时，生成的json字符串中不包含include ✅
     - (3)Query设置了include时，为单层多个relation时，生成的json符合格式要求
     - (3)Query设置了include时，为两层单个relation时，生成的json符合格式要求
     - (5)Query设置了include时，为三层单个relation时，生成的json符合格式要求
