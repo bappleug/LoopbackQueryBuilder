@@ -12,6 +12,7 @@ import tw.loopbackquery.newimpl.where.Or;
 import tw.loopbackquery.newimpl.where.Where;
 
 import java.time.Instant;
+import java.util.List;
 
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -180,6 +181,14 @@ public class LoopbackQueryTest {
                     .build().toString();
             assertThatJson(json).when(Option.IGNORING_ARRAY_ORDER).node("where").node("or").isArray()
                     .isEqualTo("[{fieldName1: {eq:\"value1\"}}, {fieldName2: {eq:\"value2\"}}]");
+        }
+
+        @Test
+        void should_return_json_with_where_like_operation_when_where_like_operation_set() {
+            String json = LoopbackQuery.query(objectMapper)
+                    .where(Where.by("fieldName").like("prefix%"))
+                    .build().toString();
+            assertThatJson(json).isEqualTo("{where: {fieldName: {like:\"prefix%\"}}}");
         }
 
         @Test

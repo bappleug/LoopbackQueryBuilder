@@ -71,6 +71,7 @@ Loopback query filter generator
         ```
     - (3)支持操作符gt/gte/lt/lte `"where": {"field_name": {"gt": 1}}`
     - (3)支持操作符between `"where": {"field_name": {"between": [1, 5]}}`
+    - (5)支持操作符ilike/nilike `"where": {"field_name": {"ilike": "{value}"}}`
     - (5)支持操作符inq/nin `"where": {"field_name", {"inq": ["value1", "value2", "value3"]}}`
     - (5)支持操作符neq `"where": {"field_name": {"neq": "{value}"}}`
 - Sub-tasks: 

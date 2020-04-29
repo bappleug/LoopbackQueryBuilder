@@ -31,7 +31,13 @@ public class Where extends HashMap<String, Object>{
         }
 
         public Where eq(Object value) {
-            operator = tw.loopbackquery.newimpl.where.Operator.EQ;
+            operator = Operator.EQ;
+            this.value = value;
+            return build();
+        }
+
+        public Where like(String value) {
+            operator = Operator.LIKE;
             this.value = value;
             return build();
         }
