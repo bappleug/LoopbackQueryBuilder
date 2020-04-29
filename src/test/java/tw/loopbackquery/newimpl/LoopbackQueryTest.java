@@ -8,6 +8,7 @@ import net.javacrumbs.jsonunit.core.Option;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import tw.loopbackquery.newimpl.where.And;
+import tw.loopbackquery.newimpl.where.Or;
 import tw.loopbackquery.newimpl.where.Where;
 
 import java.time.Instant;
@@ -169,6 +170,15 @@ public class LoopbackQueryTest {
                     .where(And.of(Where.by("fieldName1").eq("value1"), Where.by("fieldName2").eq("value2")))
                     .build().toString();
             assertThatJson(json).when(Option.IGNORING_ARRAY_ORDER).node("where").node("and").isArray()
+                    .isEqualTo("[{fieldName1: {eq:\"value1\"}}, {fieldName2: {eq:\"value2\"}}]");
+        }
+
+        @Test
+        void should_return_json_with_where_or_operation_when_where_nested_or_operation_set() {
+            String json = LoopbackQuery.query(objectMapper)
+                    .where(Or.of(Where.by("fieldName1").eq("value1"), Where.by("fieldName2").eq("value2")))
+                    .build().toString();
+            assertThatJson(json).when(Option.IGNORING_ARRAY_ORDER).node("where").node("or").isArray()
                     .isEqualTo("[{fieldName1: {eq:\"value1\"}}, {fieldName2: {eq:\"value2\"}}]");
         }
 
