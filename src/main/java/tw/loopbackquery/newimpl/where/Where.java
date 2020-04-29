@@ -42,9 +42,15 @@ public class Where extends HashMap<String, Object>{
             return build();
         }
 
-        public Where nlike(String sqlRegEx) {
+        public Where unlike(String sqlRegEx) {
             operator = Operator.NLIKE;
             this.value = sqlRegEx;
+            return build();
+        }
+
+        public Where match(String regex) {
+            operator = Operator.REGEXP;
+            this.value = regex;
             return build();
         }
 

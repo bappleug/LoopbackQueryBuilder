@@ -193,9 +193,17 @@ public class LoopbackQueryTest {
         @Test
         void should_return_json_with_where_nlike_operation_when_where_nlike_operation_set() {
             String json = LoopbackQuery.query(objectMapper)
-                    .where(Where.by("fieldName").nlike("prefix%"))
+                    .where(Where.by("fieldName").unlike("prefix%"))
                     .build().toString();
             assertThatJson(json).isEqualTo("{where: {fieldName: {nlike:\"prefix%\"}}}");
+        }
+
+        @Test
+        void should_return_json_with_where_regexp_operation_when_where_match_regex_operation_set() {
+            String json = LoopbackQuery.query(objectMapper)
+                    .where(Where.by("fieldName").match("^T{0-9A-Z}{12}"))
+                    .build().toString();
+            assertThatJson(json).isEqualTo("{where: {fieldName: {regexp:\"^T{0-9A-Z}{12}\"}}}");
         }
 
         @Test
