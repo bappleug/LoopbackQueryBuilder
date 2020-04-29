@@ -8,7 +8,8 @@ public enum Operator {
     GT("gt"),
     LT("lt"),
     GTE("gte"),
-    LTE("lte");
+    LTE("lte"),
+    BETWEEN("between");
 
     private String value;
 

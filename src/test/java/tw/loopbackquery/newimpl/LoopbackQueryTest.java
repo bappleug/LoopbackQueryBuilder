@@ -12,6 +12,7 @@ import tw.loopbackquery.newimpl.where.Or;
 import tw.loopbackquery.newimpl.where.Where;
 
 import java.time.Instant;
+import java.util.List;
 
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -268,6 +269,16 @@ public class LoopbackQueryTest {
                     .where(Where.by("fieldName").lte(Instant.parse("2019-12-03T10:15:30Z")))
                     .build().toString();
             assertThatJson(json).isEqualTo("{where: {fieldName: {lte: \"2019-12-03T10:15:30Z\"}}}");
+        }
+
+        @Test
+        void should_return_json_with_where_between_operation_when_where_between_operation_set() {
+            String json = LoopbackQuery.query(objectMapper)
+                    .where(Where.by("fieldName").between(List.of(1, 2, 3)))
+                    .build().toString();
+            assertThatJson(json).when(Option.IGNORING_ARRAY_ORDER)
+                    .node("where").node("fieldName").node("between").isArray()
+                    .isEqualTo("[1, 2, 3]");
         }
 
         @Test

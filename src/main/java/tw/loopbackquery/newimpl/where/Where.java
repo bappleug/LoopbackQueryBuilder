@@ -6,6 +6,7 @@ import tw.loopbackquery.newimpl.IBuilder;
 
 import java.time.Instant;
 import java.util.HashMap;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = false)
 @Data
@@ -100,6 +101,12 @@ public class Where extends HashMap<String, Object>{
         public Where lte(Instant date) {
             operator = Operator.LTE;
             this.value = date;
+            return build();
+        }
+
+        public <T> Where between(List<T> values) {
+            operator = Operator.BETWEEN;
+            this.value = values;
             return build();
         }
 
