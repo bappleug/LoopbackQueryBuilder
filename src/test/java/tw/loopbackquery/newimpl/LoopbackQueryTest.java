@@ -301,4 +301,33 @@ public class LoopbackQueryTest {
             assertThat(json).isEqualTo("{}");
         }
     }
+
+    @Nested
+    class NestedCases {
+        @Test
+        void should_return_nested_json_with_pagination_include_and_where() {
+            final String json = LoopbackQuery.query(objectMapper)
+                    .offset(0)
+                    .limit(10)
+                    .order(Order.by("createdOn").desc())
+                    .include("articles")
+                    .where(And.of(
+                            Where.by("channelId").eq("123-456-789"),
+                            Where.by("type").eq("image")
+                    ))
+                    .build().toString();
+            assertThatJson(json).isEqualTo(
+                    "{" +
+                            "include: \"articles\"," +
+                            "order: \"createdOn desc\","+
+                            "where: {and: [" +
+                            "   {channelId: {eq: \"123-456-789\"}}," +
+                            "   {type: {eq: \"image\"}}" +
+                            "]}," +
+                            "limit: 10," +
+                            "offset: 0" +
+                    "}"
+            );
+        }
+    }
 }
