@@ -56,7 +56,7 @@ Loopback query filter generator
     - (1)支持eq `"where": {"field_name": {"eq": "{value}"}}` ✅
     - (1)支持多个where参数`"where": {"field_name1": {"eq": "value1"}, "field_name2": {"eq": "value2"}}` ✅
     - (1)支持操作符and/or `{"where": {"and": [{"field_name1": "value1"}, {"field_name2": "value2"}]}}` ✅
-    - (1)支持操作符like/nlike `"where": {"field_name": {"like": "{value}"}}`
+    - (1)支持操作符like/nlike `"where": {"field_name": {"like": "{value}"}}` ✅
     - (1)支持操作符正则 `"where": {"field_name": {"regexp": "{regex}"}}`
     - (3)支持复合嵌套的操作符and/or 
         ```json

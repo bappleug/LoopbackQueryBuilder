@@ -12,7 +12,6 @@ import tw.loopbackquery.newimpl.where.Or;
 import tw.loopbackquery.newimpl.where.Where;
 
 import java.time.Instant;
-import java.util.List;
 
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -189,6 +188,14 @@ public class LoopbackQueryTest {
                     .where(Where.by("fieldName").like("prefix%"))
                     .build().toString();
             assertThatJson(json).isEqualTo("{where: {fieldName: {like:\"prefix%\"}}}");
+        }
+
+        @Test
+        void should_return_json_with_where_nlike_operation_when_where_nlike_operation_set() {
+            String json = LoopbackQuery.query(objectMapper)
+                    .where(Where.by("fieldName").nlike("prefix%"))
+                    .build().toString();
+            assertThatJson(json).isEqualTo("{where: {fieldName: {nlike:\"prefix%\"}}}");
         }
 
         @Test

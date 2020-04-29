@@ -2,7 +2,8 @@ package tw.loopbackquery.newimpl.where;
 
 public enum Operator {
     EQ("eq"),
-    LIKE("like");
+    LIKE("like"),
+    NLIKE("nlike");
 
     private String value;
 
