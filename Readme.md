@@ -55,7 +55,17 @@ Loopback query filter generator
     - (1)支持单个where参数类型为int,float,string,boolean,instant `"where": {"field_name": {"eq": "value"}}` ✅
     - (1)支持eq `"where": {"field_name": {"eq": "{value}"}}` ✅
     - (1)支持多个where参数`"where": {"field_name1": {"eq": "value1"}, "field_name2": {"eq": "value2"}}` ✅
-    - (1)支持操作符and/or `"where": {"and": [sub_where, sub_where]}`
+    - (1)支持操作符and/or 
+    ```json
+        {
+            "where": {
+                "or": [
+                    {"and": [{"field_name1": "value1"}, {"field_name2": "value2"}]},
+                    {"field_name3": "value3"}
+                ]
+            }
+        }
+    ```
     - (1)支持操作符like/nlike `"where": {"field_name": {"like": "{value}"}}`
     - (1)支持操作符正则 `"where": {"field_name": {"regexp": "{regex}"}}`
     - (3)支持操作符gt/gte/lt/lte `"where": {"field_name": {"gt": 1}}`

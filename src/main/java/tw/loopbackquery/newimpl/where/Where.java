@@ -1,8 +1,8 @@
-package tw.loopbackquery.newimpl;
+package tw.loopbackquery.newimpl.where;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import tw.loopbackquery.newimpl.IBuilder;
 
 import java.util.HashMap;
 
@@ -15,7 +15,7 @@ public class Where extends HashMap<String, Object>{
         return builder.by(fieldName);
     }
 
-    public Where andCombine(Where where) {
+    public Where implicitAndCombine(Where where) {
         this.putAll(where);
         return this;
     }
@@ -31,7 +31,7 @@ public class Where extends HashMap<String, Object>{
         }
 
         public Where eq(Object value) {
-            operator = Operator.EQ;
+            operator = tw.loopbackquery.newimpl.where.Operator.EQ;
             this.value = value;
             return build();
         }
@@ -43,20 +43,6 @@ public class Where extends HashMap<String, Object>{
             whereClause.put(operator.value(), value);
             where.put(by, whereClause);
             return where;
-        }
-    }
-
-    public enum Operator {
-        EQ("eq");
-
-        private String value;
-
-        Operator(String value) {
-            this.value = value;
-        }
-
-        public String value() {
-            return value;
         }
     }
 }

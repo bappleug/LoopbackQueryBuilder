@@ -4,11 +4,13 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import net.javacrumbs.jsonunit.core.Option;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import tw.loopbackquery.newimpl.where.And;
+import tw.loopbackquery.newimpl.where.Where;
 
 import java.time.Instant;
-import java.util.Date;
 
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -159,6 +161,15 @@ public class LoopbackQueryTest {
                     .where(Where.by("fieldName1").eq(false), Where.by("fieldName2").eq("value"))
                     .build().toString();
             assertThatJson(json).isEqualTo("{where: {fieldName1: {eq:false}, fieldName2: {eq:\"value\"}}}");
+        }
+
+        @Test
+        void should_return_json_with_where_and_operation_when_where_nested_and_operation_set() {
+            String json = LoopbackQuery.query(objectMapper)
+                    .where(And.of(Where.by("fieldName1").eq("value1"), Where.by("fieldName2").eq("value2")))
+                    .build().toString();
+            assertThatJson(json).when(Option.IGNORING_ARRAY_ORDER).node("where").node("and").isArray()
+                    .isEqualTo("[{fieldName1: {eq:\"value1\"}}, {fieldName2: {eq:\"value2\"}}]");
         }
 
         @Test
