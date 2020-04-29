@@ -31,7 +31,7 @@ public class Where extends HashMap<String, Object>{
             return this;
         }
 
-        public Where equal(Object value) {
+        public Where eq(Object value) {
             operator = Operator.EQ;
             this.value = value;
             return build();
@@ -55,26 +55,50 @@ public class Where extends HashMap<String, Object>{
             return build();
         }
 
-        public Where greaterThan(Number number) {
+        public Where gt(Number number) {
             operator = Operator.GT;
             this.value = number;
             return build();
         }
 
-        public Where greaterThan(Instant date) {
+        public Where gt(Instant date) {
             operator = Operator.GT;
             this.value = date;
             return build();
         }
 
-        public Where lessThan(Number number) {
+        public Where lt(Number number) {
             operator = Operator.LT;
             this.value = number;
             return build();
         }
 
-        public Where lessThan(Instant date) {
+        public Where lt(Instant date) {
             operator = Operator.LT;
+            this.value = date;
+            return build();
+        }
+
+        public Where gte(Number number) {
+            operator = Operator.GTE;
+            this.value = number;
+            return build();
+        }
+
+        public Where gte(Instant date) {
+            operator = Operator.GTE;
+            this.value = date;
+            return build();
+        }
+
+        public Where lte(Number number) {
+            operator = Operator.LTE;
+            this.value = number;
+            return build();
+        }
+
+        public Where lte(Instant date) {
+            operator = Operator.LTE;
             this.value = date;
             return build();
         }
