@@ -223,6 +223,22 @@ public class LoopbackQueryTest {
         }
 
         @Test
+        void should_return_json_with_where_lt_number_value_operation_when_where_less_than_number_operation_set() {
+            String json = LoopbackQuery.query(objectMapper)
+                    .where(Where.by("fieldName").lessThan(100.01))
+                    .build().toString();
+            assertThatJson(json).isEqualTo("{where: {fieldName: {lt: 100.01}}}");
+        }
+
+        @Test
+        void should_return_json_with_where_lt_instant_value_operation_when_where_less_than_instant_operation_set() {
+            String json = LoopbackQuery.query(objectMapper)
+                    .where(Where.by("fieldName").lessThan(Instant.parse("2019-12-03T10:15:30Z")))
+                    .build().toString();
+            assertThatJson(json).isEqualTo("{where: {fieldName: {lt: \"2019-12-03T10:15:30Z\"}}}");
+        }
+
+        @Test
         void should_return_json_with_no_include_when_include_not_set() {
             String json = LoopbackQuery.query(objectMapper)
                     .build().toString();

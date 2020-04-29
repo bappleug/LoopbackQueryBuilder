@@ -5,7 +5,8 @@ public enum Operator {
     LIKE("like"),
     NLIKE("nlike"),
     REGEXP("regexp"),
-    GT("gt");
+    GT("gt"),
+    LT("lt");
 
     private String value;
 

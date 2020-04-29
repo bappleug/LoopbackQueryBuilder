@@ -67,6 +67,18 @@ public class Where extends HashMap<String, Object>{
             return build();
         }
 
+        public Where lessThan(Number number) {
+            operator = Operator.LT;
+            this.value = number;
+            return build();
+        }
+
+        public Where lessThan(Instant date) {
+            operator = Operator.LT;
+            this.value = date;
+            return build();
+        }
+
         @Override
         public Where build() {
             final Where where = new Where();
