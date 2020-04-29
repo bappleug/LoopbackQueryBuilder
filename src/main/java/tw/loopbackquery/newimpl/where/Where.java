@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import tw.loopbackquery.newimpl.IBuilder;
 
+import java.time.Instant;
 import java.util.HashMap;
 
 @EqualsAndHashCode(callSuper = false)
@@ -30,7 +31,7 @@ public class Where extends HashMap<String, Object>{
             return this;
         }
 
-        public Where eq(Object value) {
+        public Where equal(Object value) {
             operator = Operator.EQ;
             this.value = value;
             return build();
@@ -51,6 +52,18 @@ public class Where extends HashMap<String, Object>{
         public Where match(String regex) {
             operator = Operator.REGEXP;
             this.value = regex;
+            return build();
+        }
+
+        public Where greaterThan(Number number) {
+            operator = Operator.GT;
+            this.value = number;
+            return build();
+        }
+
+        public Where greaterThan(Instant date) {
+            operator = Operator.GT;
+            this.value = date;
             return build();
         }
 

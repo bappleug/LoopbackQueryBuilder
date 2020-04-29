@@ -4,7 +4,8 @@ public enum Operator {
     EQ("eq"),
     LIKE("like"),
     NLIKE("nlike"),
-    REGEXP("regexp");
+    REGEXP("regexp"),
+    GT("gt");
 
     private String value;
 
