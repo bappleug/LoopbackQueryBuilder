@@ -166,7 +166,7 @@ public class LoopbackQueryTest {
         }
 
         @Test
-        void should_return_json_with_where_and_operation_when_where_nested_and_operation_set() {
+        void should_return_json_with_where_and_operation_when_where_and_operation_set() {
             String json = LoopbackQuery.query(objectMapper)
                     .where(And.of(Where.by("fieldName1").eq("value1"), Where.by("fieldName2").eq("value2")))
                     .build().toString();
@@ -175,12 +175,25 @@ public class LoopbackQueryTest {
         }
 
         @Test
-        void should_return_json_with_where_or_operation_when_where_nested_or_operation_set() {
+        void should_return_json_with_where_or_operation_when_where_or_operation_set() {
             String json = LoopbackQuery.query(objectMapper)
                     .where(Or.of(Where.by("fieldName1").eq("value1"), Where.by("fieldName2").eq("value2")))
                     .build().toString();
             assertThatJson(json).when(Option.IGNORING_ARRAY_ORDER).node("where").node("or").isArray()
                     .isEqualTo("[{fieldName1: {eq:\"value1\"}}, {fieldName2: {eq:\"value2\"}}]");
+        }
+
+        @Test
+        void should_return_json_with_where_nested_and_or_operation_when_where_nested_and_or_operation_set() {
+            String json = LoopbackQuery.query(objectMapper)
+                    .where(Or.of(
+                            And.of(Where.by("fieldName1").eq("value1"), Where.by("fieldName2").eq("value2")),
+                            Where.by("fieldName3").eq("value3"))
+                    )
+                    .build().toString();
+            assertThatJson(json).when(Option.IGNORING_ARRAY_ORDER).node("where").node("or").isArray()
+                    .contains("{and: [{fieldName1: {eq: \"value1\"}}, {fieldName2: {eq: \"value2\"}}]}")
+                    .contains("{fieldName3: {eq: \"value3\"}}");
         }
 
         @Test
