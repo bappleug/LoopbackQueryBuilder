@@ -2,34 +2,32 @@ package tw.loopbackquery.newimpl;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import tw.loopbackquery.newimpl.where.Where;
 
 import java.util.Arrays;
 
 @Data
 public class Query {
     @JsonIgnore
-    private LoopbackQuery loopbackQuery;
+    private Loopback loopbackQuery;
     private Integer offset;
     private Integer limit;
     private String order;
     private String include;
     private Where where;
 
-    @Override
-    public String toString() {
-        return loopbackQuery.toString(this);
+    public String stringify() {
+        return loopbackQuery.stringify(this);
     }
 
     public static class Builder implements IBuilder<Query> {
-        private LoopbackQuery loopbackQuery;
+        private Loopback loopbackQuery;
         private Integer offset;
         private Integer limit;
         private Order order;
         private String include;
         private Where where;
 
-        public Builder(LoopbackQuery loopbackQuery) {
+        public Builder(Loopback loopbackQuery) {
             this.loopbackQuery = loopbackQuery;
         }
 

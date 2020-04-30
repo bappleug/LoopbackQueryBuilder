@@ -80,7 +80,7 @@ Loopback query filter generator
 ### 单独使用Where，也可以构建和生成的json用作Loopback的update,delete操作
 - 数据格式：参见Query中的where使用
 - Sub-tasks:
-    - (5)独立构建where，可以生成符合要求格式的json
+    - (3)独立构建where，可以生成符合要求格式的json
 ### Query可以设置和生成带有fields的json query
 - 数据格式：
     - 单个field参数`"fields": {"field_name": false}`
@@ -102,5 +102,5 @@ Loopback query filter generator
       }
     ```
 - Sub-tasks: 
-    - (3)参见数据格式
+    - (5)参见数据格式
     - (1)Query未设置field时，生成的json字符串中不包含field

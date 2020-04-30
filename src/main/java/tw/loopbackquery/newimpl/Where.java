@@ -1,8 +1,7 @@
-package tw.loopbackquery.newimpl.where;
+package tw.loopbackquery.newimpl;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import tw.loopbackquery.newimpl.IBuilder;
 
 import java.time.Instant;
 import java.util.HashMap;
@@ -17,7 +16,7 @@ public class Where extends HashMap<String, Object>{
         return builder.by(fieldName);
     }
 
-    public Where implicitAndCombine(Where where) {
+    Where implicitAndCombine(Where where) {
         this.putAll(where);
         return this;
     }

@@ -1,4 +1,4 @@
-package tw.loopbackquery.newimpl.where;
+package tw.loopbackquery.newimpl;
 
 public enum Operator {
     EQ("eq"),
