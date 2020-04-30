@@ -1,21 +1,21 @@
 package tw.loopbackquery.newimpl;
 
-public class And extends Equal {
-    public static And of(Equal... equals) {
-        return new And.Builder(equals).build();
+public class And extends Where {
+    public static And of(Where... wheres) {
+        return new And.Builder(wheres).build();
     }
 
     public static class Builder implements IBuilder<And> {
 
-        private Equal[] equals;
+        private Where[] wheres;
 
-        public Builder(Equal... equals) {
-            this.equals = equals;
+        public Builder(Where... wheres) {
+            this.wheres = wheres;
         }
 
         public And build() {
             And and = new And();
-            and.put("and", equals);
+            and.put("and", wheres);
             return and;
         }
     }

@@ -1,21 +1,21 @@
 package tw.loopbackquery.newimpl;
 
-public class Or extends Equal {
-    public static Or of(Equal... equals) {
-        return new Or.Builder(equals).build();
+public class Or extends Where {
+    public static Or of(Where... wheres) {
+        return new Or.Builder(wheres).build();
     }
 
     public static class Builder implements IBuilder<Or> {
 
-        private Equal[] equals;
+        private Where[] fieldObjects;
 
-        public Builder(Equal[] equals) {
-            this.equals = equals;
+        public Builder(Where[] wheres) {
+            this.fieldObjects = wheres;
         }
 
         public Or build() {
             Or or = new Or();
-            or.put("or", equals);
+            or.put("or", fieldObjects);
             return or;
         }
     }

@@ -9,7 +9,7 @@ import java.util.List;
 
 @EqualsAndHashCode(callSuper = false)
 @Data
-public class Where extends HashMap<String, Object>{
+public class Where extends FieldObject{
 
     public static Where.Builder by(String fieldName) {
         final Builder builder = new Builder();

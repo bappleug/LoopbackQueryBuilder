@@ -148,7 +148,7 @@ class LoopbackQueryBuilderTest {
         }
 
         @Test
-        void should_return_json_with_where_and_operation_when_where_and_operation_set() {
+        void should_return_json_with_where_and_simple_equal_operation_when_where_and_equal_operation_set() {
             String json = Loopback.query()
                     .where(And.of(Equal.of("fieldName1", "value1"), Equal.of("fieldName2", "value2")))
                     .build().stringify();
@@ -157,12 +157,21 @@ class LoopbackQueryBuilderTest {
         }
 
         @Test
-        void should_return_json_with_where_or_operation_when_where_or_operation_set() {
+        void should_return_json_with_where_or_simple_equal_operation_when_where_or_simple_equal_operation_set() {
             String json = Loopback.query()
                     .where(Or.of(Equal.of("fieldName1", "value1"), Equal.of("fieldName2", "value2")))
                     .build().stringify();
             assertThatJson(json).when(Option.IGNORING_ARRAY_ORDER).node("where").node("or").isArray()
                     .isEqualTo("[{fieldName1: \"value1\"}, {fieldName2: \"value2\"}]");
+        }
+
+        @Test
+        void should_return_json_with_where_and_full_operation_when_where_and_full_operation_set() {
+            String json = Loopback.query()
+                    .where(And.of(Where.by("fieldName1").like("value1"), Equal.of("fieldName2", "value2")))
+                    .build().stringify();
+            assertThatJson(json).when(Option.IGNORING_ARRAY_ORDER).node("where").node("and").isArray()
+                    .isEqualTo("[{fieldName1: {like:\"value1\"}}, {fieldName2: \"value2\"}]");
         }
 
         @Test
@@ -283,6 +292,18 @@ class LoopbackQueryBuilderTest {
             assertThat(json).isEqualTo("{}");
         }
     }
+
+//    @Nested
+//    class FilterForOtherOperators {
+//
+//        @Test
+//        void should_return_simple_where_clause_using_where_builder() {
+//            String json = Loopback.filter(
+//                    Where.by("field").eq(1)
+//            ).build().stringify();
+//            assertThatJson(json).isEqualTo("{field: 1}");
+//        }
+//    }
 
     @Nested
     class NestedCases {

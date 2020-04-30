@@ -21,6 +21,10 @@ public class Loopback {
         return new Query.Builder(loopback);
     }
 
+//    public static Filter.Builder filter() {
+//        return null;
+//    }
+
     public String stringify(Object object) {
         try {
             return objectMapper.writeValueAsString(object);
