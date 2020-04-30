@@ -293,17 +293,35 @@ class LoopbackQueryBuilderTest {
         }
     }
 
-//    @Nested
-//    class FilterForOtherOperators {
-//
-//        @Test
-//        void should_return_simple_where_clause_using_where_builder() {
-//            String json = Loopback.filter(
-//                    Where.by("field").eq(1)
-//            ).build().stringify();
-//            assertThatJson(json).isEqualTo("{field: 1}");
-//        }
-//    }
+    @Nested
+    class FilterForOtherOperators {
+
+        @Test
+        void should_return_simple_equal_clause_using_equal_builder() {
+            String json = Loopback.filter(
+                    Equal.of("field", 1)
+            ).build().stringify();
+            assertThatJson(json).isEqualTo("{field: 1}");
+        }
+
+        @Test
+        void should_return_single_where_clause_using_where_builder() {
+            String json = Loopback.filter(
+                    Where.by("field").gt(100)
+            ).build().stringify();
+            assertThatJson(json).isEqualTo("{field: {gt:100}}");
+        }
+
+        @Test
+        void should_return_multiple_wheres_clause_using_where_builder() {
+            String json = Loopback.filter(
+                    Where.by("field1").gt(100),
+                    Where.by("field2").lt(2000),
+                    Equal.of("field3", "value")
+            ).build().stringify();
+            assertThatJson(json).isEqualTo("{field1: {gt:100}, field2: {lt:2000}, field3: \"value\"}");
+        }
+    }
 
     @Nested
     class NestedCases {

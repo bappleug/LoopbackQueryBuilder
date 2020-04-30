@@ -77,7 +77,7 @@ Loopback query filter generator
 - Sub-tasks: 
     - 参见数据格式
     - (1)Query未设置where时，生成的json字符串中不包含where
-### 单独使用Where，也可以构建和生成的json用作Loopback的update,delete操作
+### 单独使用Where，也可以构建和生成的json用作Loopback的update,delete操作 ✅
 - 数据格式：参见Query中的where使用
 - Sub-tasks:
     - (3)独立构建where，可以生成符合要求格式的json

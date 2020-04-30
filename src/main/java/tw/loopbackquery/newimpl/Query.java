@@ -8,7 +8,7 @@ import java.util.Arrays;
 @Data
 public class Query {
     @JsonIgnore
-    private Loopback loopbackQuery;
+    private Loopback loopback;
     private Integer offset;
     private Integer limit;
     private String order;
@@ -16,7 +16,7 @@ public class Query {
     private Where where;
 
     public String stringify() {
-        return loopbackQuery.stringify(this);
+        return loopback.stringify(this);
     }
 
     public static class Builder implements IBuilder<Query> {
@@ -33,7 +33,7 @@ public class Query {
 
         public Query build() {
             final Query query = new Query();
-            query.setLoopbackQuery(loopbackQuery);
+            query.setLoopback(loopbackQuery);
 
             if(offset != null) {
                 query.setOffset(offset);

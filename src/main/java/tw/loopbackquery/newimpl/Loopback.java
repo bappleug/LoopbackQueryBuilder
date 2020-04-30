@@ -21,9 +21,10 @@ public class Loopback {
         return new Query.Builder(loopback);
     }
 
-//    public static Filter.Builder filter() {
-//        return null;
-//    }
+    public static Filter.Builder filter(Where... wheres) {
+        Loopback loopback = new Loopback();
+        return new Filter.Builder(loopback).wheres(wheres);
+    }
 
     public String stringify(Object object) {
         try {
